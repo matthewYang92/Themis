@@ -5,9 +5,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
-import com.sensorsdata.analytics.android.sdk.SensorsDataAPI;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -52,19 +49,6 @@ public class MainActivity extends AppCompatActivity {
                 level = "未知";
         }
         tvLevel.setText("机型判断:" + level);
-
-        try {
-            JSONObject properties = new JSONObject();
-            properties.put("Brand", Themis.getBrand());
-            properties.put("Model", Themis.getModel());
-            properties.put("RAM", totalMemoryMB);
-            properties.put("CPU", Themis.getHardWare());
-            properties.put("Hz", mHz);
-            properties.put("Level", level);
-            SensorsDataAPI.sharedInstance().track("PhoneJudge", properties);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
 
     }
 }
